@@ -52,7 +52,48 @@ async def start_call(call_in: CallCreate, db: Session = Depends(get_db)):
     db.commit()
     db.refresh(call)
 
-    return call
+    # Synthesize initial greeting speech
+    initial_audio_base64 = None
+    if sys_settings.tts_provider in ["edge-tts", "openai"]:
+        initial_audio_base64 = await synthesize_speech(
+            text=initial_greeting,
+            provider=sys_settings.tts_provider,
+            voice=sys_settings.tts_voice,
+            api_key=sys_settings.openai_api_key
+        )
+
+    messages_resp = [
+        MessageResponse(
+            id=m.id,
+            call_id=m.call_id,
+            speaker=m.speaker,
+            content=m.content,
+            timestamp=m.timestamp
+        ) for m in call.messages
+    ]
+
+    return CallDetailResponse(
+        id=call.id,
+        started_at=call.started_at,
+        ended_at=call.ended_at,
+        duration_seconds=call.duration_seconds,
+        status=call.status,
+        original_ai_status=call.original_ai_status,
+        recording_path=call.recording_path,
+        recording_url=f"/api/calls/{call.id}/recording" if call.recording_path else None,
+        recording_consent=call.recording_consent,
+        summary=call.summary,
+        customer_requirements=call.customer_requirements,
+        objections=call.objections,
+        next_steps=call.next_steps,
+        key_features_discussed=call.key_features_discussed,
+        buying_signals=call.buying_signals,
+        notes=call.notes,
+        created_at=call.created_at,
+        message_count=len(call.messages),
+        messages=messages_resp,
+        initial_audio_base64=initial_audio_base64
+    )
 
 @router.get("", response_model=dict)
 def list_calls(

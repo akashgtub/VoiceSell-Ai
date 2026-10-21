@@ -6,13 +6,21 @@
 
 @layer base {
   body {
-    @apply bg-slate-50 text-slate-900 font-sans antialiased selection:bg-brand-500 selection:text-white;
+    background-color: #FAF9FF;
+    color: #211A33;
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     margin: 0;
     min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background-color: #6C3BDB;
+    color: #FFFFFF;
   }
 }
 
-/* Custom subtle scrollbar */
+/* Custom Purple & Lavender Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -21,11 +29,11 @@
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
+  background: #E9DFFF;
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+  background: #D4C2FE;
 }
 
 /* Voice Wave Visualizer Animations */
@@ -34,7 +42,7 @@
     height: 6px;
   }
   50% {
-    height: 32px;
+    height: 36px;
   }
 }
 
@@ -54,22 +62,22 @@
   animation: voice-bar 0.95s ease-in-out 0.25s infinite;
 }
 
-/* Pulsing radar for active call */
-@keyframes radar-pulse {
+/* Purple Radar Pulse for Live Voice Call */
+@keyframes radar-purple {
   0% {
     transform: scale(0.95);
-    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.6);
+    box-shadow: 0 0 0 0 rgba(108, 59, 219, 0.5);
   }
   70% {
     transform: scale(1);
-    box-shadow: 0 0 0 16px rgba(59, 130, 246, 0);
+    box-shadow: 0 0 0 16px rgba(108, 59, 219, 0);
   }
   100% {
     transform: scale(0.95);
-    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
+    box-shadow: 0 0 0 0 rgba(108, 59, 219, 0);
   }
 }
 
-.radar-live {
-  animation: radar-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+.radar-purple {
+  animation: radar-purple 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }

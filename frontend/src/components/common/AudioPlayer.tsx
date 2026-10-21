@@ -68,7 +68,7 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, callId }) => {
 
   if (hasError) {
     return (
-      <div className="flex items-center gap-2 p-3 bg-amber-50 border border-amber-200 rounded-lg text-amber-800 text-sm">
+      <div className="flex items-center gap-2 p-3 bg-amber-50 border border-amber-200 rounded-xl text-amber-800 text-sm">
         <AlertCircle className="w-4 h-4 text-amber-600 flex-shrink-0" />
         <span>Audio recording format is loading or unavailable.</span>
       </div>
@@ -76,7 +76,7 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, callId }) => {
   }
 
   return (
-    <div className="bg-slate-900 text-white rounded-xl p-4 shadow-sm border border-slate-800 flex flex-col gap-3">
+    <div className="bg-white text-[#211A33] rounded-2xl p-5 shadow-sm border border-[#E8E2F0] flex flex-col gap-3">
       <audio
         ref={audioRef}
         src={src}
@@ -92,14 +92,14 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, callId }) => {
         <div className="flex items-center gap-3">
           <button
             onClick={togglePlay}
-            className="w-10 h-10 rounded-full bg-brand-500 hover:bg-brand-600 transition flex items-center justify-center text-white shadow-md active:scale-95"
+            className="w-10 h-10 rounded-full bg-[#6C3BDB] hover:bg-[#5B2EC4] transition flex items-center justify-center text-white shadow-md shadow-[#6C3BDB]/25 active:scale-95"
             title={isPlaying ? 'Pause' : 'Play'}
           >
             {isPlaying ? <Pause className="w-5 h-5 fill-current" /> : <Play className="w-5 h-5 fill-current ml-0.5" />}
           </button>
           <div>
-            <div className="text-xs font-semibold text-slate-300">Call Audio Recording</div>
-            <div className="text-xs text-slate-400 font-mono">
+            <div className="text-xs font-bold text-[#211A33]">Call Audio Recording</div>
+            <div className="text-xs text-[#77718A] font-mono">
               {formatTime(currentTime)} / {formatTime(duration)}
             </div>
           </div>
@@ -108,7 +108,7 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, callId }) => {
         <div className="flex items-center gap-2">
           <button
             onClick={toggleMute}
-            className="p-2 text-slate-400 hover:text-white transition rounded-lg hover:bg-slate-800"
+            className="p-2 text-[#77718A] hover:text-[#6C3BDB] transition rounded-xl hover:bg-[#F3EEFF]"
             title={isMuted ? 'Unmute' : 'Mute'}
           >
             {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
@@ -117,7 +117,7 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, callId }) => {
           <a
             href={src}
             download={`voxsell_call_${callId || 'recording'}.webm`}
-            className="p-2 text-slate-400 hover:text-white transition rounded-lg hover:bg-slate-800"
+            className="p-2 text-[#77718A] hover:text-[#6C3BDB] transition rounded-xl hover:bg-[#F3EEFF]"
             title="Download Recording"
           >
             <Download className="w-4 h-4" />
@@ -133,7 +133,7 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, callId }) => {
           max={duration || 100}
           value={currentTime}
           onChange={handleSeek}
-          className="w-full h-1.5 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-brand-500"
+          className="w-full h-1.5 bg-[#F3EEFF] rounded-lg appearance-none cursor-pointer accent-[#6C3BDB]"
         />
       </div>
     </div>

@@ -7,27 +7,40 @@ export default {
   theme: {
     extend: {
       colors: {
-        navy: {
-          950: '#0a0f1d',
-          900: '#0f172a',
-          850: '#131e36',
-          800: '#1e293b',
-          700: '#334155',
-          600: '#475569',
-        },
+        // Requested Design System Tokens
+        'primary-purple': '#6C3BDB',
+        'dark-purple': '#4C1D95',
+        'light-purple': '#F3EEFF',
+        'soft-lavender': '#E9DFFF',
+        'main-bg': '#FAF9FF',
+        'primary-text': '#211A33',
+        'secondary-text': '#77718A',
+        'border-lavender': '#E8E2F0',
+        
+        // Brand palette mapping
         brand: {
-          50: '#eff6ff',
-          100: '#dbeafe',
-          200: '#bfdbfe',
-          500: '#3b82f6',
-          600: '#2563eb',
-          700: '#1d4ed8',
+          50: '#F3EEFF',
+          100: '#E9DFFF',
+          200: '#D4C2FE',
+          300: '#BA9FFE',
+          400: '#9C78F7',
+          500: '#8054EC',
+          600: '#6C3BDB', // Primary Purple
+          700: '#5B2EC4', // Darker on hover
+          800: '#4C1D95', // Dark Purple
+          900: '#371370',
         },
         accent: {
+          50: '#FAF9FF',
+          100: '#F3EEFF',
+          200: '#E9DFFF',
           500: '#8b5cf6',
-          600: '#7c3aed',
-          700: '#6d28d9',
-        }
+          600: '#6C3BDB',
+          700: '#4C1D95',
+        },
+        success: '#16A34A',
+        warning: '#F59E0B',
+        error: '#DC2626',
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],

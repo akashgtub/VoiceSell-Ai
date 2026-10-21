@@ -63,6 +63,7 @@ class CallResponse(BaseModel):
 
 class CallDetailResponse(CallResponse):
     messages: List[MessageResponse] = []
+    initial_audio_base64: Optional[str] = None
 
 # --- Product Configuration ---
 class ProductConfigBase(BaseModel):

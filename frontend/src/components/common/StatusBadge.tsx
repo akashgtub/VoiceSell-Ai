@@ -1,5 +1,5 @@
 import React from 'react';
-import { SalesStatus } from '../../types';
+import type { SalesStatus } from '../../types';
 import { CheckCircle2, Calendar, ThumbsUp, Clock, XCircle, PhoneOff, Radio } from 'lucide-react';
 
 interface StatusBadgeProps {
@@ -13,50 +13,50 @@ export const StatusBadge: React.FC<StatusBadgeProps> = ({ status, size = 'md', s
     switch (status) {
       case 'Converted':
         return {
-          bg: 'bg-emerald-50 text-emerald-700 border-emerald-200',
-          dot: 'bg-emerald-500',
+          bg: 'bg-emerald-50 text-[#16A34A] border-emerald-200',
+          dot: 'bg-[#16A34A]',
           icon: CheckCircle2,
         };
       case 'Demo Requested':
         return {
-          bg: 'bg-purple-50 text-purple-700 border-purple-200',
-          dot: 'bg-purple-500',
+          bg: 'bg-[#F3EEFF] text-[#4C1D95] border-[#E9DFFF]',
+          dot: 'bg-[#6C3BDB]',
           icon: Calendar,
         };
       case 'Interested':
         return {
-          bg: 'bg-blue-50 text-blue-700 border-blue-200',
-          dot: 'bg-blue-500',
+          bg: 'bg-[#F3EEFF] text-[#6C3BDB] border-[#E9DFFF]',
+          dot: 'bg-[#6C3BDB]',
           icon: ThumbsUp,
         };
       case 'Follow-up Required':
         return {
-          bg: 'bg-amber-50 text-amber-700 border-amber-200',
-          dot: 'bg-amber-500',
+          bg: 'bg-amber-50 text-[#F59E0B] border-amber-200',
+          dot: 'bg-[#F59E0B]',
           icon: Clock,
         };
       case 'Not Interested':
         return {
-          bg: 'bg-rose-50 text-rose-700 border-rose-200',
-          dot: 'bg-rose-500',
+          bg: 'bg-rose-50 text-[#DC2626] border-rose-200',
+          dot: 'bg-[#DC2626]',
           icon: XCircle,
         };
       case 'No Response':
         return {
-          bg: 'bg-slate-100 text-slate-600 border-slate-200',
-          dot: 'bg-slate-400',
+          bg: 'bg-slate-100 text-[#77718A] border-slate-200',
+          dot: 'bg-[#77718A]',
           icon: PhoneOff,
         };
       case 'In Progress':
         return {
-          bg: 'bg-cyan-50 text-cyan-700 border-cyan-200',
-          dot: 'bg-cyan-500 animate-ping',
+          bg: 'bg-[#F3EEFF] text-[#6C3BDB] border-[#E9DFFF]',
+          dot: 'bg-[#6C3BDB] animate-ping',
           icon: Radio,
         };
       default:
         return {
-          bg: 'bg-slate-50 text-slate-700 border-slate-200',
-          dot: 'bg-slate-400',
+          bg: 'bg-[#F3EEFF] text-[#6C3BDB] border-[#E9DFFF]',
+          dot: 'bg-[#6C3BDB]',
           icon: Radio,
         };
     }
@@ -66,7 +66,7 @@ export const StatusBadge: React.FC<StatusBadgeProps> = ({ status, size = 'md', s
 
   const sizeClasses = {
     sm: 'px-2 py-0.5 text-xs',
-    md: 'px-2.5 py-1 text-xs font-medium',
+    md: 'px-2.5 py-1 text-xs font-semibold',
     lg: 'px-3 py-1.5 text-sm font-semibold',
   }[size];
 

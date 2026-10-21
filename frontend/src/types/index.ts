@@ -35,6 +35,7 @@ export interface Call {
   created_at: string;
   message_count?: number;
   messages?: Message[];
+  initial_audio_base64?: string | null;
 }
 
 export interface ProductConfig {

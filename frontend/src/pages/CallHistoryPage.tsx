@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Call } from '../types';
+import type { Call } from '../types';
 import { api } from '../api/client';
 import { CallFilters } from '../components/call-history/CallFilters';
 import { StatusBadge } from '../components/common/StatusBadge';
-import { Phone, Clock, Mic, ChevronRight, ChevronLeft, RefreshCw, FileText } from 'lucide-react';
+import { Clock, Mic, ChevronRight, ChevronLeft, RefreshCw, FileText } from 'lucide-react';
 
 interface CallHistoryPageProps {
   onSelectCall: (callId: string) => void;
@@ -71,7 +71,7 @@ export const CallHistoryPage: React.FC<CallHistoryPageProps> = ({ onSelectCall }
   };
 
   return (
-    <div className="p-8 max-w-7xl mx-auto space-y-6">
+    <div className="p-4 sm:p-8 max-w-7xl mx-auto space-y-6">
       {/* Search & Filter Header */}
       <CallFilters
         search={search}
@@ -83,18 +83,18 @@ export const CallHistoryPage: React.FC<CallHistoryPageProps> = ({ onSelectCall }
       />
 
       {/* Main Table Card */}
-      <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
-        <div className="px-6 py-4 border-b border-slate-100 flex items-center justify-between">
+      <div className="bg-white rounded-2xl border border-[#E8E2F0] shadow-sm overflow-hidden">
+        <div className="px-6 py-4 border-b border-[#E8E2F0] flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <h3 className="font-bold text-slate-900 text-base">Recorded Sales Call Sessions</h3>
-            <span className="text-xs px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 font-semibold">
+            <h3 className="font-bold text-[#211A33] text-base">Recorded Sales Call Sessions</h3>
+            <span className="text-xs px-2.5 py-0.5 rounded-full bg-[#F3EEFF] text-[#6C3BDB] font-bold border border-[#E9DFFF]">
               {total} total
             </span>
           </div>
 
           <button
             onClick={fetchCalls}
-            className="p-1.5 text-slate-400 hover:text-slate-600 rounded-lg hover:bg-slate-100 transition"
+            className="p-1.5 text-[#77718A] hover:text-[#6C3BDB] rounded-lg hover:bg-[#F3EEFF] transition"
             title="Refresh"
           >
             <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
@@ -103,19 +103,19 @@ export const CallHistoryPage: React.FC<CallHistoryPageProps> = ({ onSelectCall }
 
         <div className="overflow-x-auto">
           {loading && calls.length === 0 ? (
-            <div className="p-12 text-center text-slate-400">
-              <RefreshCw className="w-6 h-6 animate-spin mx-auto mb-2 text-brand-600" />
-              <p className="text-sm font-semibold text-slate-600">Loading call history...</p>
+            <div className="p-12 text-center text-[#77718A]">
+              <RefreshCw className="w-6 h-6 animate-spin mx-auto mb-2 text-[#6C3BDB]" />
+              <p className="text-sm font-bold text-[#211A33]">Loading call history...</p>
             </div>
           ) : calls.length === 0 ? (
-            <div className="p-12 text-center text-slate-400">
-              <FileText className="w-10 h-10 text-slate-300 mx-auto mb-2" />
-              <p className="text-sm font-semibold text-slate-700">No Sales Calls Found</p>
-              <p className="text-xs text-slate-400 mt-1">Try adjusting your search criteria or start a new call.</p>
+            <div className="p-12 text-center text-[#77718A]">
+              <FileText className="w-10 h-10 text-[#E8E2F0] mx-auto mb-2" />
+              <p className="text-sm font-bold text-[#211A33]">No Sales Calls Found</p>
+              <p className="text-xs text-[#77718A] mt-1">Try adjusting your search criteria or start a new call.</p>
             </div>
           ) : (
             <table className="w-full text-left text-sm">
-              <thead className="bg-slate-50/80 text-slate-500 text-xs font-semibold uppercase tracking-wider border-b border-slate-100">
+              <thead className="bg-[#FAF9FF] text-[#77718A] text-xs font-bold uppercase tracking-wider border-b border-[#E8E2F0]">
                 <tr>
                   <th className="px-6 py-3.5">Call ID</th>
                   <th className="px-6 py-3.5">Date & Time</th>
@@ -126,22 +126,22 @@ export const CallHistoryPage: React.FC<CallHistoryPageProps> = ({ onSelectCall }
                   <th className="px-6 py-3.5 text-right">Action</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100">
+              <tbody className="divide-y divide-[#E8E2F0]">
                 {calls.map((call) => (
                   <tr
                     key={call.id}
                     onClick={() => onSelectCall(call.id)}
-                    className="hover:bg-slate-50/80 cursor-pointer transition group"
+                    className="hover:bg-[#FAF9FF] cursor-pointer transition group"
                   >
-                    <td className="px-6 py-4 font-mono text-xs font-bold text-slate-800">
+                    <td className="px-6 py-4 font-mono text-xs font-bold text-[#211A33]">
                       #{call.id.slice(0, 8)}
                     </td>
-                    <td className="px-6 py-4 text-xs text-slate-600 whitespace-nowrap">
+                    <td className="px-6 py-4 text-xs text-[#77718A] whitespace-nowrap font-medium">
                       {formatDate(call.started_at)}
                     </td>
-                    <td className="px-6 py-4 text-xs font-medium text-slate-600 whitespace-nowrap">
+                    <td className="px-6 py-4 text-xs font-semibold text-[#211A33] whitespace-nowrap">
                       <div className="flex items-center gap-1.5">
-                        <Clock className="w-3.5 h-3.5 text-slate-400" />
+                        <Clock className="w-3.5 h-3.5 text-[#77718A]" />
                         <span>{formatDuration(call.duration_seconds)}</span>
                       </div>
                     </td>
@@ -149,18 +149,18 @@ export const CallHistoryPage: React.FC<CallHistoryPageProps> = ({ onSelectCall }
                       <StatusBadge status={call.status} size="sm" />
                     </td>
                     <td className="px-6 py-4 max-w-sm">
-                      <p className="text-xs text-slate-600 line-clamp-1">
+                      <p className="text-xs text-[#77718A] line-clamp-1 font-medium">
                         {call.summary || 'Summary not available.'}
                       </p>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       {call.recording_path ? (
-                        <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-700 text-xs font-medium border border-emerald-200">
-                          <Mic className="w-3 h-3" />
+                        <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#F3EEFF] text-[#6C3BDB] text-xs font-bold border border-[#E9DFFF]">
+                          <Mic className="w-3 h-3 text-[#6C3BDB]" />
                           <span>Audio</span>
                         </span>
                       ) : (
-                        <span className="text-xs text-slate-400">None</span>
+                        <span className="text-xs text-[#77718A]">—</span>
                       )}
                     </td>
                     <td className="px-6 py-4 text-right whitespace-nowrap">
@@ -169,10 +169,10 @@ export const CallHistoryPage: React.FC<CallHistoryPageProps> = ({ onSelectCall }
                           e.stopPropagation();
                           onSelectCall(call.id);
                         }}
-                        className="px-3 py-1.5 rounded-lg bg-slate-100 group-hover:bg-brand-50 text-slate-600 group-hover:text-brand-600 font-semibold text-xs transition inline-flex items-center gap-1"
+                        className="px-3 py-1.5 rounded-xl bg-white border border-[#E8E2F0] group-hover:bg-[#F3EEFF] group-hover:border-[#E9DFFF] text-[#6C3BDB] font-bold text-xs transition inline-flex items-center gap-1 shadow-sm"
                       >
                         <span>Details</span>
-                        <ChevronRight className="w-3.5 h-3.5" />
+                        <ChevronRight className="w-3.5 h-3.5 text-[#6C3BDB]" />
                       </button>
                     </td>
                   </tr>
@@ -184,22 +184,22 @@ export const CallHistoryPage: React.FC<CallHistoryPageProps> = ({ onSelectCall }
 
         {/* Pagination Controls */}
         {totalPages > 1 && (
-          <div className="px-6 py-3.5 bg-slate-50/50 border-t border-slate-100 flex items-center justify-between text-xs text-slate-600">
+          <div className="px-6 py-3.5 bg-[#FAF9FF] border-t border-[#E8E2F0] flex items-center justify-between text-xs text-[#77718A]">
             <div>
-              Showing page <span className="font-bold">{page}</span> of <span className="font-bold">{totalPages}</span>
+              Showing page <span className="font-bold text-[#211A33]">{page}</span> of <span className="font-bold text-[#211A33]">{totalPages}</span>
             </div>
             <div className="flex items-center gap-2">
               <button
                 onClick={() => setPage(p => Math.max(1, p - 1))}
                 disabled={page <= 1}
-                className="p-1.5 rounded-lg border border-slate-200 bg-white hover:bg-slate-50 disabled:opacity-50 transition"
+                className="p-1.5 rounded-lg border border-[#E8E2F0] bg-white hover:bg-[#F3EEFF] disabled:opacity-50 text-[#6C3BDB] transition"
               >
                 <ChevronLeft className="w-4 h-4" />
               </button>
               <button
                 onClick={() => setPage(p => Math.min(totalPages, p + 1))}
                 disabled={page >= totalPages}
-                className="p-1.5 rounded-lg border border-slate-200 bg-white hover:bg-slate-50 disabled:opacity-50 transition"
+                className="p-1.5 rounded-lg border border-[#E8E2F0] bg-white hover:bg-[#F3EEFF] disabled:opacity-50 text-[#6C3BDB] transition"
               >
                 <ChevronRight className="w-4 h-4" />
               </button>

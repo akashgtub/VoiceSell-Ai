@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { NavTab } from './types';
+import type { NavTab } from './types';
 import { Sidebar } from './components/layout/Sidebar';
 import { Header } from './components/layout/Header';
 import { OverviewPage } from './pages/OverviewPage';
@@ -14,6 +14,7 @@ import { useVoiceCall } from './hooks/useVoiceCall';
 export const App: React.FC = () => {
   const [currentTab, setCurrentTab] = useState<NavTab>('overview');
   const [selectedCallId, setSelectedCallId] = useState<string | null>(null);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   // Global live voice session hook
   const voiceCall = useVoiceCall();
@@ -76,8 +77,8 @@ export const App: React.FC = () => {
   };
 
   return (
-    <div className="flex h-screen bg-slate-50 overflow-hidden font-sans">
-      {/* Dark Navy Persistent Sidebar */}
+    <div className="flex h-screen bg-[#FAF9FF] overflow-hidden font-sans">
+      {/* White & Lavender Sidebar with Mobile Drawer */}
       <Sidebar
         currentTab={currentTab}
         onSelectTab={(tab) => {
@@ -85,17 +86,19 @@ export const App: React.FC = () => {
           setCurrentTab(tab);
         }}
         isCallActive={isCallActive}
+        mobileOpen={mobileMenuOpen}
+        onCloseMobile={() => setMobileMenuOpen(false)}
       />
 
       {/* Main Workspace */}
-      <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
+      <div className="flex-1 flex flex-col min-w-0 overflow-hidden bg-[#FAF9FF]">
         <Header
           currentTab={currentTab}
           onStartCallClick={handleStartCallClick}
-          isCallActive={isCallActive}
+          onToggleMobileMenu={() => setMobileMenuOpen(prev => !prev)}
         />
 
-        <main className="flex-1 overflow-y-auto bg-slate-50/60">
+        <main className="flex-1 overflow-y-auto bg-[#FAF9FF]">
           {renderContent()}
         </main>
       </div>
